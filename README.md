@@ -28,6 +28,10 @@ Once you cloned the repo, do the following
 
     ,u
 
+7. Install the fonts
+
+    $ $HOME/.vim/plugged/fonts/./install.sh
+
 
 ### Finally,...
 Enjoy :)
