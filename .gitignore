@@ -1,7 +1,7 @@
 # Dirs
-vim/plugged/*
-vim/files/bkp/*
-vim/files/swap/*
+vim/plugged/*/
+vim/files/bkp/*~
+vim/files/swap/*.swp
 vim/files/undo/*
 
 # Files
