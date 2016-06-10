@@ -1,4 +1,4 @@
-# vimConfig_new
+# vimConfig
 My new sweetheart vim config &lt;3
 
 
