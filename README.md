@@ -16,7 +16,7 @@ Once you cloned the repo, do the following
 
 3. Create the needed directories:
 
-    $ mkdir -p $HOME/.vim/files/{bkp,swap,undo}
+    $ mkdir -p $HOME/.vim/files/{bkp,swap,undo} $HOME/.vim/plugged
 
 4. Run `vim`
 
