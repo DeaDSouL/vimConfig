@@ -5,6 +5,7 @@ vim/files/swap/*
 vim/files/undo/*
 
 # Files
+vim/.netrwhist
 *.swp
 *.bkp
 *~
