@@ -14,13 +14,17 @@ Once you cloned the repo, do the following
 
     $ ln -s /path/to/vimConfig/vim $HOME/.vim
 
-3. Run `vim`
+3. Create the needed directories:
 
-4. Upgrade `vim-plug`, by hitting:
+    $ mkdir -p $HOME/.vim/files/{bkp,swap,undo}
+
+4. Run `vim`
+
+5. Upgrade `vim-plug`, by hitting:
 
     ,U
 
-5. Install/Update plugins, by hitting:
+6. Install/Update plugins, by hitting:
 
     ,u
 
