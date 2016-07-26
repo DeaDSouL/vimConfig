@@ -10,6 +10,7 @@ Plug 'tpope/vim-fugitive'               " Git Integration
 "Plug 'nvie/vim-flake8'                  " [Python]: syntax checker
 " _____Language_____
 Plug 'scrooloose/syntastic'             " syntax checker
+Plug 'smancill/conky-syntax.vim'        " conky syntax
 " _____Completion_____
 Plug 'davidhalter/jedi-vim'             " [Python]: The awesome Python autocompletion with VIM
 " _____Code_display_____
