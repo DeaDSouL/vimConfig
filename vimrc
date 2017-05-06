@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-fugitive'               " Git Integration
 "Plug 'nvie/vim-flake8'                  " [Python]: syntax checker
+"Plug 'suan/vim-instant-markdown'        " Instant Markdown previews from Vim
 " _____Language_____
 Plug 'scrooloose/syntastic'             " syntax checker
 Plug 'smancill/conky-syntax.vim'        " conky syntax
@@ -23,10 +24,11 @@ Plug 'powerline/fonts'
 Plug 'altercation/vim-colors-solarized'
 Plug 'jnurmine/Zenburn'
 Plug 'flazz/vim-colorschemes' 
-"Plug 'godlygeek/csapprox'              " Make gvim-only colorschemes work transparently in terminal vim
+"Plug 'godlygeek/csapprox'               " Make gvim-only colorschemes work transparently in terminal vim
 " _____Misc_____
 Plug 'kien/ctrlp.vim'                   " Full path fuzzy file, buffer, mru, tag, ... finder for Vim.
 "Plug 'vim-scripts/indentpython.vim'     " [Python]: indent
+"Plug 'vimwiki/vimwiki'                  " Personal Wiki for Vim
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -557,10 +559,29 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let python_highlight_all=1
 
 " ----------------------------------- -----------------------------------------
+" |                               vimwiki                                     |
+" -----------------------------------------------------------------------------
+" helppage -> :h vimwiki-syntax
+"set nocompatible
+" vimwiki with markdown support
+"let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+
+" ----------------------------------- -----------------------------------------
+" |                               Startup                                     |
+" -----------------------------------------------------------------------------
+"let g:instant_markdown_autostart = 0    " disable autostart
+"map <leader>md :InstantMarkdownPreview<CR>
+
+" ----------------------------------- -----------------------------------------
 " |                               Startup                                     |
 " -----------------------------------------------------------------------------
 
 " ----------------------------------- -----------------------------------------
 " |                               Startup                                     |
 " -----------------------------------------------------------------------------
+
+" ----------------------------------- -----------------------------------------
+" |                               Startup                                     |
+" -----------------------------------------------------------------------------
+
 
