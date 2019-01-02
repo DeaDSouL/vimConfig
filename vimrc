@@ -1,5 +1,17 @@
 " -----------------------------------------------------------------------------
-" |                               vim-plug                                    |
+" |                            Folding help                                   |{{{
+" -----------------------------------------------------------------------------
+"  Create fold: visual select what you want, then hit: zf
+"  Delete folde: go to folded line then hit: zd
+"  zo: open fold
+"  zc: close fold
+"  za: toggle fold
+"  zO, zC, zA: same as above, but for all
+"  zr: open all folds
+"  zm: close all folds
+
+" -----------------------------------------------------------------------------}}}
+" |                               vim-plug                                    |{{{
 " -----------------------------------------------------------------------------
 " https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/plugged')
@@ -8,7 +20,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-fugitive'               " Git Integration
 "Plug 'nvie/vim-flake8'                  " [Python]: syntax checker
-"Plug 'suan/vim-instant-markdown'        " Instant Markdown previews from Vim
+Plug 'suan/vim-instant-markdown'        " Instant Markdown previews from Vim
 " _____Language_____
 Plug 'scrooloose/syntastic'             " syntax checker
 Plug 'smancill/conky-syntax.vim'        " conky syntax
@@ -19,7 +31,7 @@ Plug 'tmhedberg/SimpylFold'             " [Python]: folding
 " _____Interface_____
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'powerline/powerline'
+Plug 'powerline/powerline'
 Plug 'powerline/fonts'
 Plug 'altercation/vim-colors-solarized'
 Plug 'jnurmine/Zenburn'
@@ -37,8 +49,8 @@ call plug#end()
 " Shortcut : Upgrade vim-plug
 :noremap ,U :PlugUpgrade<CR>
 
-" -----------------------------------------------------------------------------
-" |                             Misc Settings                                 |
+" -----------------------------------------------------------------------------}}}
+" |                             Misc Settings                                 | {{{
 " -----------------------------------------------------------------------------
 syntax on                       " Turn on syntax highlighting
 syntax enable
@@ -48,8 +60,8 @@ set number                      " Show line numbers
 set matchpairs+=<:>
 set vb t_vb=                    " Turn off the bell, this could be more annoying, but I'm not sure how
 
-" -----------------------------------------------------------------------------
-" |                              Indenting                                    |
+" -----------------------------------------------------------------------------}}}
+" |                              Indenting                                    |{{{
 " -----------------------------------------------------------------------------
 set tabstop=8       " show existing tab with 4 spaces width
 set softtabstop=4
@@ -59,16 +71,17 @@ set expandtab       " On pressing tab, insert 4 spaces
 set autoindent      " Automatically set the indent of a new line (local to buffer)
 set si              " smartindent (local to buffer)
 
-" -----------------------------------------------------------------------------
-" |                               Folding                                     |
+" -----------------------------------------------------------------------------}}}
+" |                               Folding                                     |{{{
 " -----------------------------------------------------------------------------
 " Enable folding
 set foldmethod=indent   " fold based on indent
 set foldnestmax=3       " 99, deepest fold is 3 levels
-set nofoldenable        " don't fold by default
+"set nofoldenable        " don't fold by default
+autocmd FileType vim setlocal foldmethod=marker
 
-" -----------------------------------------------------------------------------
-" |                              File Stuff                                   |
+" -----------------------------------------------------------------------------}}}
+" |                              File Stuff                                   |{{{
 " -----------------------------------------------------------------------------
 " To show current filetype use: set filetype
 autocmd FileType html :set filetype=xhtml " we couldn't care less about html
@@ -82,16 +95,16 @@ set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 "set listchars=trail:.,tab:>-,eol:$
 "set nolist
 
-" -----------------------------------------------------------------------------
-" |                             Scrollbars                                    |
+" -----------------------------------------------------------------------------}}}
+" |                             Scrollbars                                    |{{{
 " -----------------------------------------------------------------------------
 set sidescrolloff=7 "2
 set scrolloff=3
 set sidescroll=1
 set numberwidth=4
 
-" -----------------------------------------------------------------------------
-" |                               Windows                                     |
+" -----------------------------------------------------------------------------}}}
+" |                               Windows                                     |{{{
 " -----------------------------------------------------------------------------
 set equalalways " Multiple windows, when created, are equal in size
 set splitbelow splitright
@@ -107,15 +120,15 @@ nnoremap <C-H> <C-W><C-H>
 "make Y consistent with C and D
 nnoremap Y y$
 
-" -----------------------------------------------------------------------------
-" |                          Cursor highlights                                |
+" -----------------------------------------------------------------------------}}}
+" |                          Cursor highlights                                |{{{
 " -----------------------------------------------------------------------------
 set cursorline
 "set cursorcolumn
 set showmatch       " Show matching bracets when text indicator is over them
 
-" -----------------------------------------------------------------------------
-" |                           Cursor Movement                                 |
+" -----------------------------------------------------------------------------}}}
+" |                           Cursor Movement                                 |{{{
 " -----------------------------------------------------------------------------
 " Make cursor move by visual lines instead of file lines (when wrapping)
 map <up> gk
@@ -126,16 +139,16 @@ map j gj
 imap <down> <C-o>gj
 map E ge
 
-" -----------------------------------------------------------------------------
-" |                              Searching                                    |
+" -----------------------------------------------------------------------------}}}
+" |                              Searching                                    |{{{
 " -----------------------------------------------------------------------------
 set hlsearch    " highlight search
 set incsearch   " incremental search, search as you type
 set ignorecase  " Ignore case when searching
 set smartcase   " Ignore case when searching lowercase
 
-" -----------------------------------------------------------------------------
-" |                            Status Line                                    |
+" -----------------------------------------------------------------------------}}}
+" |                            Status Line                                    |{{{
 " -----------------------------------------------------------------------------
 set showcmd         " Display incomplete commands
 set showmode        " Show current mode down the bottom
@@ -293,15 +306,15 @@ function! s:Median(nums)
     endif
 endfunction
 
-" -----------------------------------------------------------------------------
-" |                            Line Wrapping                                  |
+" -----------------------------------------------------------------------------}}}
+" |                            Line Wrapping                                  |{{{
 " -----------------------------------------------------------------------------
 "set nowrap
 set wrap        " Don't wrap lines
 "set linebreak  " Wrap lines at convenient points
 
-" -----------------------------------------------------------------------------
-" |                              Mappings                                     |
+" -----------------------------------------------------------------------------}}}
+" |                              Mappings                                     |{{{
 " -----------------------------------------------------------------------------
 " Professor VIM says '87% of users prefer jj over esc', jj abrams strongly disagrees
 imap jj <Esc>
@@ -314,8 +327,8 @@ imap ,s self.
 "imap hh =>
 "imap kk ->
 
-" -----------------------------------------------------------------------------
-" |                             Directories                                   |
+" -----------------------------------------------------------------------------}}}
+" |                             Directories                                   |{{{
 " -----------------------------------------------------------------------------
 set undodir=~/.vim/files/undo       " Setup undo location
 set undofile                        " enable backup
@@ -325,16 +338,16 @@ set backup                          " enable backup
 set directory=~/.vim/files/swap//   " Set Swap directory
 autocmd BufEnter * lcd %:p:h        " Sets path to directory buffer was loaded from
 
-" -----------------------------------------------------------------------------
-" |                           Inser New Line                                  |
+" -----------------------------------------------------------------------------}}}
+" |                           Inser New Line                                  |{{{
 " -----------------------------------------------------------------------------
 " awesome, inserts new line without going into insert mode
 map <S-Enter> O<ESC>
 map <Enter> o<ESC>
 set formatoptions-=o " don't continue comments when pushing o/O
 
-" -----------------------------------------------------------------------------
-" |                              Sessions                                     |
+" -----------------------------------------------------------------------------}}}
+" |                              Sessions                                     |{{{
 " -----------------------------------------------------------------------------
 " Sets what is saved when you save a session
 set sessionoptions=blank,buffers,curdir,folds,help,resize,tabpages,winsize
@@ -342,8 +355,8 @@ set hidden          " Hide buffers when not displayed
 set ttimeoutlen=50  " Solves: there is a pause when leaving insert mode
 set history=1000    " store lots of :cmdline history
 
-" -----------------------------------------------------------------------------
-" |                                Mouse                                      |
+" -----------------------------------------------------------------------------}}}
+" |                                Mouse                                      |{{{
 " -----------------------------------------------------------------------------
 "behave xterm
 "set selectmode=mouse
@@ -352,14 +365,14 @@ set history=1000    " store lots of :cmdline history
 "    set ttymouse=xterm2
 "endif
 
-" -----------------------------------------------------------------------------
-" |                              Ruby stuff                                   |
+" -----------------------------------------------------------------------------}}}
+" |                              Ruby stuff                                   |{{{
 " -----------------------------------------------------------------------------
 "compiler ruby         " Enable compiler support for ruby
 "map <F5> :!ruby %<CR>
 
-" -----------------------------------------------------------------------------
-" |                              OS Specific                                  |
+" -----------------------------------------------------------------------------}}}
+" |                              OS Specific                                  |{{{
 " |                       (GUI stuff goes in gvimrc)                          |
 " -----------------------------------------------------------------------------
 "if has("mac")
@@ -374,8 +387,8 @@ set history=1000    " store lots of :cmdline history
     ""
 "endif
 
-" -----------------------------------------------------------------------------
-" |                             GUI Settings                                  |
+" -----------------------------------------------------------------------------}}}
+" |                             GUI Settings                                  |{{{
 " -----------------------------------------------------------------------------
 " Nice themes:
 "   Monokai         vividchalk      xxx
@@ -393,8 +406,8 @@ else
     colorscheme default
 endif
 
-" -----------------------------------------------------------------------------
-" |                               NERDTree                                    |
+" -----------------------------------------------------------------------------}}}
+" |                               NERDTree                                    |{{{
 " -----------------------------------------------------------------------------
 " Shortcut : toggle NERDTree
 map <F9> :NERDTreeToggle<CR>
@@ -425,8 +438,8 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " Hide .pyc files
 "let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 
-" -----------------------------------------------------------------------------
-" |                            Omni Completion                                |
+" -----------------------------------------------------------------------------}}}
+" |                            Omni Completion                                |{{{
 " -----------------------------------------------------------------------------
 set wildmode=longest:full,full " make cmdline tab completion better
 "set wildmode=list:longest   " make cmdline tab completion similar to bash
@@ -443,8 +456,8 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
 "autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete " may require ruby compiled in //DEADSOUL
 
-" -----------------------------------------------------------------------------
-" |                           OmniCppComplete                                 |
+" -----------------------------------------------------------------------------}}}
+" |                           OmniCppComplete                                 |{{{
 " -----------------------------------------------------------------------------
 "set nocp
 " Configure tags - add additional tags here or comment out not-used ones
@@ -468,8 +481,8 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 "au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 "set completeopt=menuone,menu,longest,preview
 
-" -----------------------------------------------------------------------------
-" |                             SnippetsEmu                                   |
+" -----------------------------------------------------------------------------}}}
+" |                             SnippetsEmu                                   |{{{
 " -----------------------------------------------------------------------------
 "imap <unique> <C-j> <Plug>Jumper
 "let g:snip_start_tag = "_\."
@@ -477,15 +490,15 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 "let g:snip_elem_delim = ":"
 "let g:snip_set_textmate_cp = '1'  " Tab to expand snippets, not automatically.
 
-" -----------------------------------------------------------------------------
-" |                         fuzzyfinder_textmate                              |
+" -----------------------------------------------------------------------------}}}
+" |                         fuzzyfinder_textmate                              |{{{
 " -----------------------------------------------------------------------------
 map ,f :FuzzyFinderTextMate<CR>
 map ,b :FuzzyFinderBuffer<CR>
 "let g:fuzzy_ignore = '.o;.obj;.bak;.exe;.pyc;.pyo;.DS_Store;.db'
 
-" -----------------------------------------------------------------------------
-" |                            autocomplpop                                   |
+" -----------------------------------------------------------------------------}}}
+" |                            autocomplpop                                   |{{{
 " -----------------------------------------------------------------------------
 " complete option
 "set complete=.,w,b,u,t,k
@@ -494,8 +507,8 @@ map ,b :FuzzyFinderBuffer<CR>
 let g:AutoComplPop_IgnoreCaseOption = 0
 let g:AutoComplPop_BehaviorKeywordLength = 2
 
-" -----------------------------------------------------------------------------
-" |                              Jedi-vim                                     |
+" -----------------------------------------------------------------------------}}}
+" |                              Jedi-vim                                     |{{{
 " -----------------------------------------------------------------------------
 " Awesome Python autocompletion with VIM
 let g:jedi#documentation_command = "K"
@@ -507,17 +520,22 @@ let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>r"
 let g:jedi#show_call_signatures = 2 " solve undo-history bug: https://github.com/davidhalter/jedi-vim/issues/313
 
-" -----------------------------------------------------------------------------
-" |                             vim-airline                                   |
+" -----------------------------------------------------------------------------}}}
+" |                             vim-airline                                   |{{{
 " -----------------------------------------------------------------------------
 let g:airline_powerline_fonts = 1
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#left_sep = ' '
 "let g:airline#extensions#tabline#left_alt_sep = '|'
+"if !exists('g:airline_symbols')
+"  let g:airline_symbols = {}
+"endif
+"let g:airline_symbols.space = "\ua0"
+set t_Co=256 " to be colorful in tmux
 
-" -----------------------------------------------------------------------------
-" |                              SimpylFold                                   |
+" -----------------------------------------------------------------------------}}}
+" |                              SimpylFold                                   |{{{
 " -----------------------------------------------------------------------------
 autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
 autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
@@ -530,20 +548,35 @@ autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
 " don't want to see your imports folded, add this
 "let g:SimpylFold_fold_import = 0
 
-" -----------------------------------------------------------------------------
-" |                              syntastic                                    |
+" -----------------------------------------------------------------------------}}}
+" |                              syntastic                                    |{{{
 " -----------------------------------------------------------------------------
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let syntastic_stl_format = '[Syntax: %E{line:%fe }%W{#W:%w}%B{ }%E{#E:%e}]'
-" ----------------------------------- -----------------------------------------
-" |                               Ctrl-P                                      |
+
+" -----------------------------------------------------------------------------}}}
+" |                               Ctrl-P                                      |{{{
 " -----------------------------------------------------------------------------
 " Exclude files and directories
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+
+    " * Press <F5> to purge the cache for the current directory to get new 
+    "   files, remove deleted files and apply new ignore options.
+    " * Press <c-f> and <c-b> to cycle between modes.
+    " * Press <c-d> to switch to filename only search instead of full path.
+    " * Press <c-r> to switch to regexp mode.
+    " * Use <c-j>, <c-k> or the arrow keys to navigate the result list.
+    " * Use <c-t> or <c-v>, <c-x> to open the selected entry in a new tab or 
+    "   in a new split.
+    " * Use <c-n>, <c-p> to select the next/previous string in the prompt's 
+    "   history.
+    " * Use <c-y> to create a new file and its parent directories.
+    " * Use <c-z> to mark/unmark multiple files and <c-o> to open them.
+
 "let g:ctrlp_custom_ignore = {
 "  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
 "  \ 'file': '\v\.(pyc|o|swp|exe|so|dll)$',
@@ -552,31 +585,27 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 " Use a custom file listing command:
 "let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
 
-" -----------------------------------------------------------------------------
-" |                               flake8                                      |
+" -----------------------------------------------------------------------------}}}
+" |                               flake8                                      |{{{
 " -----------------------------------------------------------------------------
 " Make your python code look pretty
-let python_highlight_all=1
+"let python_highlight_all=1
 
-" ----------------------------------- -----------------------------------------
-" |                               vimwiki                                     |
+" -----------------------------------------------------------------------------}}}
+" |                               vimwiki                                     |{{{
 " -----------------------------------------------------------------------------
 " helppage -> :h vimwiki-syntax
 "set nocompatible
 " vimwiki with markdown support
 "let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 
-" ----------------------------------- -----------------------------------------
-" |                               Startup                                     |
+" -----------------------------------------------------------------------------}}}
+" |                              Markdonw                                     |
 " -----------------------------------------------------------------------------
-"let g:instant_markdown_autostart = 0    " disable autostart
-"map <leader>md :InstantMarkdownPreview<CR>
+let g:instant_markdown_autostart = 0    " disable autostart
+map <leader>md :InstantMarkdownPreview<CR>
 
-" ----------------------------------- -----------------------------------------
-" |                               Startup                                     |
 " -----------------------------------------------------------------------------
-
-" ----------------------------------- -----------------------------------------
 " |                               Startup                                     |
 " -----------------------------------------------------------------------------
 
