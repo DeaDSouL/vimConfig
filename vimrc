@@ -19,8 +19,19 @@ call plug#begin('~/.vim/plugged')
 " _____Integration_____
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-fugitive'               " Git Integration
-"Plug 'nvie/vim-flake8'                  " [Python]: syntax checker
-Plug 'suan/vim-instant-markdown'        " Instant Markdown previews from Vim
+Plug 'nvie/vim-flake8'                  " [Python]: syntax checker
+" ______Markdown_______
+"Plug 'suan/vim-instant-markdown'        " Instant Markdown previews from Vim
+Plug 'plasticboy/vim-markdown'          " Markdown Syntax
+
+" If you don't have nodejs and yarn
+" use pre build
+Plug 'godlygeek/tabular' | Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }     " Markdown previews from Vim
+" If you have nodejs and yarn
+"Plug 'godlygeek/tabular' | Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+" _______Writing_______
+Plug 'junegunn/limelight.vim'           " Focus on current paragraph by diming the rest
+Plug 'junegunn/goyo.vim'                " Remove all distraction, and centering the text
 " _____Language_____
 Plug 'scrooloose/syntastic'             " syntax checker
 Plug 'smancill/conky-syntax.vim'        " conky syntax
@@ -39,7 +50,7 @@ Plug 'flazz/vim-colorschemes'
 "Plug 'godlygeek/csapprox'               " Make gvim-only colorschemes work transparently in terminal vim
 " _____Misc_____
 Plug 'kien/ctrlp.vim'                   " Full path fuzzy file, buffer, mru, tag, ... finder for Vim.
-"Plug 'vim-scripts/indentpython.vim'     " [Python]: indent
+Plug 'vim-scripts/indentpython.vim'     " [Python]: indent
 "Plug 'vimwiki/vimwiki'                  " Personal Wiki for Vim
 
 " Add plugins to &runtimepath
@@ -537,12 +548,13 @@ set t_Co=256 " to be colorful in tmux
 " -----------------------------------------------------------------------------}}}
 " |                              SimpylFold                                   |{{{
 " -----------------------------------------------------------------------------
-autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
-autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+"autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+"autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+
 "  enable previewing of your folded classes' and functions' docstrings in the fold text
 "let g:SimpylFold_docstring_preview = 1
 " Want to see the docstrings for folded cod
-"let g:SimpylFold_docstring_preview=1
+"let g:SimpylFold_docstring_preview = 1
 " don't want to see your docstrings folded
 "let g:SimpylFold_fold_docstring = 0
 " don't want to see your imports folded, add this
@@ -589,7 +601,9 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 " |                               flake8                                      |{{{
 " -----------------------------------------------------------------------------
 " Make your python code look pretty
-"let python_highlight_all=1
+let python_highlight_all=1
+let syntastic_python_checkers=['flake8']
+"let g:syntastic_python_checkers=['flake8']
 
 " -----------------------------------------------------------------------------}}}
 " |                               vimwiki                                     |{{{
@@ -600,17 +614,143 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 "let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 
 " -----------------------------------------------------------------------------}}}
-" |                              Markdonw                                     |
+" |                         vim-instant-markdown                              |{{{
 " -----------------------------------------------------------------------------
 let g:instant_markdown_autostart = 0    " disable autostart
 map <leader>md :InstantMarkdownPreview<CR>
 
+" -----------------------------------------------------------------------------}}}
+" |                         markdown-preview.nvim                             |{{{
 " -----------------------------------------------------------------------------
-" |                               Startup                                     |
-" -----------------------------------------------------------------------------
+"  CONFIG {{{
+" set to 1, nvim will open the preview window after entering the markdown buffer
+" default: 0
+let g:mkdp_auto_start = 0
 
-" ----------------------------------- -----------------------------------------
-" |                               Startup                                     |
+" set to 1, the nvim will auto close current preview window when change
+" from markdown buffer to another buffer
+" default: 1
+let g:mkdp_auto_close = 1
+
+" set to 1, the vim will refresh markdown when save the buffer or
+" leave from insert mode, default 0 is auto refresh markdown as you edit or
+" move the cursor
+" default: 0
+let g:mkdp_refresh_slow = 0
+
+" set to 1, the MarkdownPreview command can be use for all files,
+" by default it can be use in markdown file
+" default: 0
+let g:mkdp_command_for_global = 0
+
+" set to 1, preview server available to others in your network
+" by default, the server listens on localhost (127.0.0.1)
+" default: 0
+let g:mkdp_open_to_the_world = 0
+
+" use custom IP to open preview page
+" useful when you work in remote vim and preview on local browser
+" more detail see: https://github.com/iamcco/markdown-preview.nvim/pull/9
+" default empty
+let g:mkdp_open_ip = ''
+
+" specify browser to open preview page
+" default: ''
+let g:mkdp_browser = ''
+
+" set to 1, echo preview page url in command line when open preview page
+" default is 0
+let g:mkdp_echo_preview_url = 0
+
+" a custom vim function name to open preview page
+" this function will receive url as param
+" default is empty
+let g:mkdp_browserfunc = ''
+
+" options for markdown render
+" mkit: markdown-it options for render
+" katex: katex options for math
+" uml: markdown-it-plantuml options
+" maid: mermaid options
+" disable_sync_scroll: if disable sync scroll, default 0
+" sync_scroll_type: 'middle', 'top' or 'relative', default value is 'middle'
+"   middle: mean the cursor position alway show at the middle of the preview page
+"   top: mean the vim top viewport alway show at the top of the preview page
+"   relative: mean the cursor position alway show at the relative positon of the preview page
+" hide_yaml_meta: if hide yaml metadata, default is 1
+" sequence_diagrams: js-sequence-diagrams options
+let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'middle',
+    \ 'hide_yaml_meta': 1,
+    \ 'sequence_diagrams': {}
+    \ }
+
+" use a custom markdown style must be absolute path
+let g:mkdp_markdown_css = $HOME.'/.vim/files/inc/github-markdown.css'
+
+" use a custom highlight style must absolute path
+let g:mkdp_highlight_css = ''
+
+" use a custom port to start server or random for empty
+let g:mkdp_port = ''
+
+" preview page title
+" ${name} will be replace with the file name
+let g:mkdp_page_title = '「${name}」'
+" }}}
+" MAPPINGS {{{
+" normal/insert
+" <Plug>MarkdownPreview
+" <Plug>MarkdownPreviewStop
+" <Plug>MarkdownPreviewToggle
+" 
+" " example
+"nmap <C-s> <Plug>MarkdownPreview
+"nmap <M-s> <Plug>MarkdownPreviewStop
+"nmap <C-p> <Plug>MarkdownPreviewToggle
+" }}}
+" COMMANDS {{{
+" Start the preview
+" :MarkdownPreview
+"
+" Stop the preview"
+" :MarkdownPreviewStop
+" }}}
+
+" -----------------------------------------------------------------------------}}}
+" |                           LimeLight.vim                                   |{{{
 " -----------------------------------------------------------------------------
+" Color name (:help cterm-colors) or ANSI code
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+
+" Color name (:help gui-colors) or RGB color
+let g:limelight_conceal_guifg = 'DarkGray'
+let g:limelight_conceal_guifg = '#777777'
+
+" Default: 0.5
+let g:limelight_default_coefficient = 0.7
+
+" Number of preceding/following paragraphs to include (default: 0)
+let g:limelight_paragraph_span = 1
+
+" Beginning/end of paragraph
+"   When there's no empty line between the paragraphs
+"   and each paragraph starts with indentation
+let g:limelight_bop = '^\s'
+let g:limelight_eop = '\ze\n^\s'
+
+" Highlighting priority (default: 10)
+"   Set it to -1 not to overrule hlsearch
+let g:limelight_priority = -1
+
+" -----------------------------------------------------------------------------}}}
+" |                               Startup                                     |
+" ----------------------------------- -----------------------------------------
 
 
