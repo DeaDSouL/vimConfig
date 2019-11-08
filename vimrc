@@ -21,7 +21,7 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-fugitive'               " Git Integration
 Plug 'nvie/vim-flake8'                  " [Python]: syntax checker
 " ______Markdown_______
-"Plug 'suan/vim-instant-markdown'        " Instant Markdown previews from Vim
+"Plug 'suan/vim-instant-markdown', {'for': 'markdown'}        " Instant Markdown previews from Vim
 Plug 'plasticboy/vim-markdown'          " Markdown Syntax
 
 " If you don't have nodejs and yarn
@@ -692,6 +692,7 @@ let g:mkdp_preview_options = {
 
 " use a custom markdown style must be absolute path
 let g:mkdp_markdown_css = $HOME.'/.vim/files/inc/github-markdown.css'
+let g:mkdp_markdown_css = ''
 
 " use a custom highlight style must absolute path
 let g:mkdp_highlight_css = ''
