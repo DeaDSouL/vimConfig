@@ -1,3 +1,7 @@
+# IMPORTANT
+The repository has been moved to [GitLab.com/DeaDSouL/vimConfig](https://gitlab.com/DeaDSouL/vimConfig).
+
+
 # vimConfig
 My new sweetheart vim config &lt;3
 
